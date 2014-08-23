@@ -21,8 +21,8 @@ public class EndLevel : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         gameManager.cameraManager.transform.GetChild(0).gameObject.SetActive(true);
-        
-        col.transform.position = new Vector3(-24, 2.3f, 0);
+
+        gameManager.playerManager.ResetPlayer();
         gameManager.levelManager.currentLevel++;
         gameManager.levelManager.ArrangeObstacles();
     }
