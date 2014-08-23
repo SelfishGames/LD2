@@ -16,10 +16,6 @@ public class LevelManager : MonoBehaviour
     public int currentLevel = 0;
     public List<GameObject> levels = new List<GameObject>();
 
-    //Camera vars
-    private float targetRotation;
-    private float rotateAmount = 55f;
-
     private Color tempWallColour;
 
     void Start()
@@ -35,13 +31,13 @@ public class LevelManager : MonoBehaviour
         {
             if (worldState)
             {
+                gameManager.cameraManager.StartLerp(1);
                 worldState = false;
-                targetRotation = 0f;
             }
             else
             {
+                gameManager.cameraManager.StartLerp(2);
                 worldState = true;
-                targetRotation = 90f;
             }
         }
 
@@ -50,9 +46,6 @@ public class LevelManager : MonoBehaviour
             //Day
             case true:
                 {
-                    if (!gameManager.cameraManager.ChangeView(2, Vector3.up))
-                        break;
-
                     nearWall.renderer.material.color = Color.Lerp(
                     nearWall.renderer.material.color, tempWallColour, Time.deltaTime);
 
@@ -61,9 +54,6 @@ public class LevelManager : MonoBehaviour
             //Night
             case false:
                 {
-                    if (!gameManager.cameraManager.ChangeView(1, Vector3.down))
-                        break;
-
                     nearWall.renderer.material.color = Color.Lerp(
                     nearWall.renderer.material.color, Color.clear, Time.deltaTime);
 

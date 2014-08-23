@@ -4,45 +4,63 @@ using System.Collections;
 public class CameraManager : MonoBehaviour
 {
     public Transform player;
-    public Transform pivot;
 
-    private Vector3 tempPos;
+    private Vector3 tempPos,
+        sideOffset,
+        topOffset,
+        pivot,
+        target;
+
+    private float delay;
+
+    private Quaternion tempEuler;
 
     void Start()
     {
-        tempPos = transform.position;
+        pivot.y = 6f;
+        pivot.z = 0f;
+
+        delay = 5;
     }
 
     void Update()
     {
+        pivot.x = player.position.x;
+
+        tempPos = transform.position;
         tempPos.x = player.position.x;
         transform.position = tempPos;
-    }
-
-    public bool ChangeView(int worlds, Vector3 direction)
-    {
-        if (worlds == 1)
-        {
-            if (transform.eulerAngles.x <= 5)
-            {
-                Debug.Log("World 1 returned true");
-                return true;
-            }
-        }
-        else if (worlds == 2)
-        {
-            if (transform.eulerAngles.x >= 85)
-            {
-                Debug.Log("World 2 returned true");
-                return true;
-            }
-        }
 
         transform.LookAt(pivot);
-        transform.Translate(direction * Time.deltaTime * 50);
-        Debug.Log(transform.eulerAngles);
 
-        return false;
+        topOffset = new Vector3(player.position.x, 30f, 0f);
+        sideOffset = new Vector3(player.position.x, 6f, -30f);
+    }
+
+    public void StartLerp(int i)
+    {
+        if (i == 1)
+        {
+            target = sideOffset;
+            StopCoroutine(LerpCamera());
+        }
+        else if (i == 2)
+        {
+            target = topOffset;
+            StopCoroutine(LerpCamera());
+        }
+
+        StartCoroutine(LerpCamera());
+    }
+
+    IEnumerator LerpCamera()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + delay)
+        {
+            transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime);
+            yield return null;
+        }
     }
 }
 
