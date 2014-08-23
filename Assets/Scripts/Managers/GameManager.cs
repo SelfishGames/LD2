@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //if (cameraManager.transform.GetChild(0).gameObject.activeSelf && Input.GetKeyDown("return"))
-        //{
-        //    cameraManager.transform.GetChild(0).gameObject.SetActive(false);
-        //}
+        if (cameraManager.transform.GetChild(0).gameObject.activeSelf && Input.GetKeyDown("return"))
+        {
+            cameraManager.transform.GetChild(0).gameObject.SetActive(false);
+            player.gameObject.SetActive(true);
+        }
     }
 
     public void TriggerCollision()

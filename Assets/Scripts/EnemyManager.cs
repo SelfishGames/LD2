@@ -34,8 +34,18 @@ public class EnemyManager : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
         {
-            col.gameObject.SetActive(false);
+
+            gameManager.playerManager.gameObject.SetActive(false);
             gameManager.TriggerCollision();
+            StartCoroutine(ExplosionDelay());
         }
+    }
+
+    IEnumerator ExplosionDelay()
+    {
+        yield return new WaitForSeconds(2f);
+
+        gameManager.playerManager.ResetPlayer();
+        gameManager.player.gameObject.SetActive(true);
     }
 }

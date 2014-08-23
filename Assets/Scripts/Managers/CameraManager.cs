@@ -5,6 +5,7 @@ public class CameraManager : MonoBehaviour
 {
     public Transform player;
     public Transform pivot;
+    public Transform target;
 
     private Vector3 tempPos;
 
@@ -17,6 +18,7 @@ public class CameraManager : MonoBehaviour
     {
         tempPos.x = player.position.x;
         transform.position = tempPos;
+
     }
 
     public bool ChangeView(int worlds, Vector3 direction)
@@ -25,7 +27,6 @@ public class CameraManager : MonoBehaviour
         {
             if (transform.eulerAngles.x <= 5)
             {
-                Debug.Log("World 1 returned true");
                 return true;
             }
         }
@@ -33,14 +34,12 @@ public class CameraManager : MonoBehaviour
         {
             if (transform.eulerAngles.x >= 85)
             {
-                Debug.Log("World 2 returned true");
                 return true;
             }
         }
 
         transform.LookAt(pivot);
         transform.Translate(direction * Time.deltaTime * 50);
-        Debug.Log(transform.eulerAngles);
 
         return false;
     }

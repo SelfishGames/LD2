@@ -48,4 +48,11 @@ public class PlayerManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void ResetPlayer()
+    {
+        gameManager.playerExplosion.SetActive(false);
+        rigidbody.velocity = Vector3.zero;
+        transform.position = new Vector3(-24, 2.3f, -1);
+    }
 }
