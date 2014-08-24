@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         //If the player has landed 
-        if (col.gameObject.name == "FloorCeiling" && isJumping)
+        if (col.gameObject.name == "Floor" && isJumping)
             isJumping = false;
     }
     #endregion
