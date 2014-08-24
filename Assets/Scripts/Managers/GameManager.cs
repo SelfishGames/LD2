@@ -3,8 +3,9 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    // General public objects
-    public GameObject playerExplosion;
+    // General public objects 
+    // (0,1 are player explosions, 2,3 are end particle systems)
+    public GameObject[] particleSystems;
     public Transform player;
 
     // Scripts
@@ -15,12 +16,12 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        soundManager.music[0].Play();
+        //soundManager.music[0].Play();
     }
 
     void Update()
     {
-        if (cameraManager.transform.GetChild(0).gameObject.activeSelf && Input.GetKeyDown("return"))
+        if (cameraManager.transform.GetChild(0).gameObject.activeSelf && Input.GetKeyDown("space"))
         {
             cameraManager.transform.GetChild(0).gameObject.SetActive(false);
             player.gameObject.SetActive(true);
@@ -32,10 +33,23 @@ public class GameManager : MonoBehaviour
 
     public void TriggerCollision()
     {
-        // Set the location of the explosion.
-        playerExplosion.transform.localPosition = player.transform.localPosition;
-        // Play the explosion.
-        playerExplosion.SetActive(true);
+        if(!levelManager.worldState)
+        {
+            // Set the location of the explosion.
+            particleSystems[0].transform.localPosition = player.transform.localPosition;
+            // Play the explosion.
+            particleSystems[0].SetActive(true);
+        }
+
+        if (levelManager.worldState)
+        {
+            // Set the location of the explosion.
+            particleSystems[1].transform.localPosition = player.transform.localPosition;
+            // Play the explosion.
+            particleSystems[1].SetActive(true);
+        }
+       
+        
         //Play death sound
         soundManager.soundFX[0].Play();
     }

@@ -67,6 +67,10 @@ public class LevelManager : MonoBehaviour
 
                     mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.5f, Time.deltaTime);
 
+                    gameManager.playerManager.particleSystems[1].SetActive(false);
+                    gameManager.playerManager.particleSystems[0].SetActive(true);
+                    gameManager.particleSystems[2].SetActive(false);
+                    gameManager.particleSystems[3].SetActive(true);
                     return;
                 }
             //Night
@@ -81,6 +85,10 @@ public class LevelManager : MonoBehaviour
 
                     mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.2f, Time.deltaTime);
 
+                    gameManager.playerManager.particleSystems[0].SetActive(false);
+                    gameManager.playerManager.particleSystems[1].SetActive(true);
+                    gameManager.particleSystems[3].SetActive(false);
+                    gameManager.particleSystems[2].SetActive(true);
                     return;
                 }
         }

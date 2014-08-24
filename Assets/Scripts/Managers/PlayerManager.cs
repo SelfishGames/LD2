@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
     public GameManager gameManager;
     public Vector3 startPos;
     public float speed;
+    public GameObject[] particleSystems;
 
     private Vector3 tempPos;
 
@@ -48,7 +49,11 @@ public class PlayerManager : MonoBehaviour
 
     public void ResetPlayer()
     {
-        gameManager.playerExplosion.SetActive(false);
+        for (int i = 0; i < 2; i++)
+        {
+            gameManager.particleSystems[i].SetActive(false);
+        }
+            
         rigidbody.velocity = Vector3.zero;
         transform.position = startPos;
     }
