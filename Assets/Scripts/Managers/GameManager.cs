@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        //soundManager.music[0].Play();
+
+
 
         soundManager.music[0].Play();
-
     }
 
     void Update()
