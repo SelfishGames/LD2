@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
+    #region Fields
     public GameManager gameManager;
 
     public Transform player;
     public Transform nearWall;
+    public Transform ceiling;
 
     //True is day, false is night
     [HideInInspector]
@@ -16,12 +18,17 @@ public class LevelManager : MonoBehaviour
     public int currentLevel = 0;
     public List<GameObject> levels = new List<GameObject>();
 
-    private Color tempWallColour;
+    private Color tempWallColour,
+        tempCeilingColour;
+    #endregion
 
+    #region Start
     void Start()
     {
         tempWallColour = nearWall.renderer.material.color;
+        tempCeilingColour = ceiling.renderer.material.color;
     }
+    #endregion
 
     #region Update
     void Update()
@@ -46,16 +53,24 @@ public class LevelManager : MonoBehaviour
             //Day
             case true:
                 {
+                    //Fades the nearWall and ceiling in and out
                     nearWall.renderer.material.color = Color.Lerp(
-                    nearWall.renderer.material.color, tempWallColour, Time.deltaTime);
+                        nearWall.renderer.material.color, tempWallColour, Time.deltaTime);
+
+                    ceiling.renderer.material.color = Color.Lerp(
+                        ceiling.renderer.material.color, Color.clear, Time.deltaTime);
 
                     return;
                 }
             //Night
             case false:
                 {
+                    //Fades the nearWall and ceiling in and out
                     nearWall.renderer.material.color = Color.Lerp(
-                    nearWall.renderer.material.color, Color.clear, Time.deltaTime);
+                        nearWall.renderer.material.color, Color.clear, Time.deltaTime);
+
+                    ceiling.renderer.material.color = Color.Lerp(
+                        ceiling.renderer.material.color, tempCeilingColour, Time.deltaTime);
 
                     return;
                 }
@@ -63,6 +78,7 @@ public class LevelManager : MonoBehaviour
     }
     #endregion
 
+    #region ArrangeObstacles
     public void ArrangeObstacles()
     {
         foreach (GameObject go in levels)
@@ -72,5 +88,6 @@ public class LevelManager : MonoBehaviour
 
         }
     }
+    #endregion
 }
 
