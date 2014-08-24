@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraManager : MonoBehaviour
 {
+    #region Fields
     public Transform player;
 
     private Vector3 tempPos,
@@ -11,34 +12,43 @@ public class CameraManager : MonoBehaviour
         pivot,
         target;
 
-    private float delay;
+    private float delay = 5;
 
     private Quaternion tempEuler;
+    #endregion 
 
+    #region Start
     void Start()
     {
-        pivot.y = 6f;
-        pivot.z = 0f;
-
-        delay = 5;
-    }
-
-    void Update()
-    {
-        pivot.x = player.position.x;
-
-        tempPos = transform.position;
-        tempPos.x = player.position.x;
-        transform.position = tempPos;
-
-        transform.LookAt(pivot);
-
+        //Sets the initial points of pivot and offset positions
+        pivot = new Vector3(player.position.x, 6f, 0f);
         topOffset = new Vector3(player.position.x, 30f, 0f);
         sideOffset = new Vector3(player.position.x, 6f, -30f);
     }
+    #endregion
 
+    #region Update
+    void Update()
+    {
+        //Sets the pivot & offset positions x to follow the player
+        //(Clamps the pivot & camera x to not go beyond the level)
+        pivot.x = Mathf.Clamp(player.position.x, -13f, 19f);
+        topOffset.x = player.position.x;
+        sideOffset.x = player.position.x;
+
+        tempPos = transform.position;
+        tempPos.x = Mathf.Clamp(player.position.x, -13f, 19f); 
+        transform.position = tempPos;
+
+        transform.LookAt(pivot);
+    }
+    #endregion
+
+    #region StartLerp
     public void StartLerp(int i)
     {
+        //Int i is basically if the camera is going from top to side 
+        //or vis versa
         if (i == 1)
         {
             target = sideOffset;
@@ -52,9 +62,12 @@ public class CameraManager : MonoBehaviour
 
         StartCoroutine(LerpCamera());
     }
+    #endregion
 
+    #region LerpCamera
     IEnumerator LerpCamera()
     {
+        //Lerps the camera until the delay time has been reached
         float startTime = Time.time;
         while (Time.time < startTime + delay)
         {
@@ -62,5 +75,6 @@ public class CameraManager : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 }
 

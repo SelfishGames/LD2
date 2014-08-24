@@ -11,3 +11,8 @@
 /*.userprefs
 /*.pidb
 /*.booproj
+*.mat
+*.mat
+Assets/Materials/CeilingMat.mat
+*.mat
+Assets/Materials/NearWallMat.mat
