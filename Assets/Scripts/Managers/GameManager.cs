@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        soundManager.music[0].Play();
+
     }
 
     void Update()
@@ -37,6 +37,6 @@ public class GameManager : MonoBehaviour
         // Play the explosion.
         playerExplosion.SetActive(true);
         //Play death sound
-        soundManager.soundFX[0].Play();
+        soundManager.PlayExplosionSound();
     }
 }
