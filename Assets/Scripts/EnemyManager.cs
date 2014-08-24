@@ -7,16 +7,32 @@ public class EnemyManager : MonoBehaviour
     public float speed;
     public GameManager gameManager;
 
+    private Color tempColour;
     private int currentArea = 0;
 
     void Start()
     {
+        tempColour = transform.renderer.material.color;
         transform.position = patrolPoints[0].position;
         currentArea = 0;
     }
 
     void Update()
     {
+        if (!gameManager.levelManager.worldState)
+        {
+            StartCoroutine(RemoveCollider(true));
+            transform.renderer.material.color = Color.Lerp(
+                        transform.renderer.material.color, tempColour, Time.deltaTime);
+        }
+
+        else
+        {
+            StartCoroutine(RemoveCollider(false));
+            transform.renderer.material.color = Color.Lerp(
+                        transform.renderer.material.color, Color.clear, Time.deltaTime);
+        }
+
         if(transform.position == patrolPoints[currentArea].position)
         {
             currentArea++;
@@ -47,5 +63,12 @@ public class EnemyManager : MonoBehaviour
 
         gameManager.playerManager.ResetPlayer();
         gameManager.player.gameObject.SetActive(true);
+    }
+
+
+    IEnumerator RemoveCollider(bool change)
+    {
+        yield return new WaitForSeconds(2);
+        collider.enabled = change;
     }
 }
