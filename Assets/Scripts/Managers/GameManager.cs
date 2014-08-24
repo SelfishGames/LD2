@@ -11,6 +11,12 @@ public class GameManager : MonoBehaviour
     public CameraManager cameraManager;
     public LevelManager levelManager;
     public PlayerManager playerManager;
+    public SoundManager soundManager;
+
+    void Start()
+    {
+        soundManager.music[0].Play();
+    }
 
     void Update()
     {
@@ -27,5 +33,7 @@ public class GameManager : MonoBehaviour
         playerExplosion.transform.localPosition = player.transform.localPosition;
         // Play the explosion.
         playerExplosion.SetActive(true);
+        //Play death sound
+        soundManager.soundFX[0].Play();
     }
 }
