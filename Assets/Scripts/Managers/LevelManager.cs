@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public Transform nearWall;
     public Transform ceiling;
 
+
     //True is day, false is night
     [HideInInspector]
     public bool worldState = true;

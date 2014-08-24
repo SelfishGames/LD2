@@ -9,42 +9,24 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 tempPos;
 
-	void Start () 
-    {
-	
-	}
-	
-	void Update () 
-    {
-
-	}
+    private bool isJumping = false;
 
     #region FixedUpdate
     void FixedUpdate()
     {
         if (gameManager.levelManager.worldState)
         {
-            if (Input.GetKey(KeyCode.LeftArrow))
-                rigidbody.AddForce(Vector3.left * speed);
-            if (Input.GetKey(KeyCode.RightArrow))
-                rigidbody.AddForce(Vector3.right * speed);
-
-            if (Input.GetKey(KeyCode.UpArrow))
-                rigidbody.AddForce(Vector3.forward * speed);
-            if (Input.GetKey(KeyCode.DownArrow))
-                rigidbody.AddForce(Vector3.back * speed);
+            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
         }
         else
         {
-            if (Input.GetKey(KeyCode.LeftArrow))
-                rigidbody.AddForce(Vector3.left * speed);
-            if (Input.GetKey(KeyCode.RightArrow))
-                rigidbody.AddForce(Vector3.right * speed);
+            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
 
-            if (Input.GetKey(KeyCode.UpArrow))
-                rigidbody.AddForce(Vector3.up * speed);
-            if (Input.GetKey(KeyCode.DownArrow))
-                rigidbody.AddForce(Vector3.down * speed);
+            if (Input.GetKey(KeyCode.UpArrow) && !isJumping)
+            {
+                isJumping = true;
+                rigidbody.AddForce(Vector3.up * 700);
+            }
         }
     }
     #endregion
@@ -55,4 +37,13 @@ public class PlayerManager : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         transform.position = new Vector3(-24, 2.3f, -1);
     }
+
+    #region OnCollisionEnter
+    void OnCollisionEnter(Collision col)
+    {
+        //If the player has landed 
+        if (col.gameObject.name == "FloorCeiling" && isJumping)
+            isJumping = false;
+    }
+    #endregion
 }
