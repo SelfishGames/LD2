@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerManager : MonoBehaviour 
+public class PlayerManager : MonoBehaviour
 {
+    #region Fields
     public GameManager gameManager;
     public Vector3 startPos;
     public float speed;
@@ -10,8 +11,20 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 tempPos;
 
-    private bool justJumped = false;
-    private int jumpCount = 0;
+    private bool isJumping = false;
+    #endregion
+
+    void Start()
+    {
+
+    }
+
+    #region Update
+    void Update()
+    {
+        
+    }
+    #endregion
 
     #region FixedUpdate
     void FixedUpdate()
@@ -24,29 +37,31 @@ public class PlayerManager : MonoBehaviour
         {
             rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
 
-            if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
+            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
-                justJumped = true;
-                jumpCount++;
                 rigidbody.AddForce(Vector3.up * 600);
-                gameManager.soundManager.soundFX[1].Play();
+                InvokeRepeating("CheckForFloor", 1f, 0.1f);
+                isJumping = true;
+                gameManager.soundManager.PlayJumpSound();
             }
-        }
-
-        RaycastHit hit;
-        if (!Physics.Raycast(transform.position, Vector3.down, out hit, 1f) && justJumped)
-        {
-            justJumped = false;
-        }
-
-        if(!justJumped)
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
-                jumpCount = 0;
         }
     }
     #endregion
 
+    void CheckForFloor()
+    {
+        if (isJumping)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.5f))
+            {
+                isJumping = false;
+                CancelInvoke();
+            }
+        }
+    }
+
+    #region ResetPlayer
     public void ResetPlayer()
     {
         for (int i = 0; i < 2; i++)
@@ -57,6 +72,7 @@ public class PlayerManager : MonoBehaviour
         rigidbody.velocity = Vector3.zero;
         transform.position = startPos;
     }
+    #endregion
 
     #region OnCollisionEnter
     void OnCollisionEnter(Collision col)

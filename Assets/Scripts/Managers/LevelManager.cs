@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         //Changes worldStates 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             if (worldState)
             {
