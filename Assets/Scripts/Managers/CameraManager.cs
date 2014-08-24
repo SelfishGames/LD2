@@ -32,12 +32,14 @@ public class CameraManager : MonoBehaviour
     {
         //Sets the pivot & offset positions x to follow the player
         //(Clamps the pivot & camera x to not go beyond the level)
-        pivot.x = Mathf.Clamp(player.position.x, -16.5f, 19f);
+        //pivot.x = Mathf.Clamp(player.position.x, -16.5f, 19f);
+        pivot.x = player.position.x;
         topOffset.x = player.position.x;
         sideOffset.x = player.position.x;
 
         tempPos = transform.position;
-        tempPos.x = Mathf.Clamp(player.position.x, -16.5f, 19f); 
+        //tempPos.x = Mathf.Clamp(player.position.x, -16.5f, 19f); 
+        tempPos.x = player.position.x;
         transform.position = tempPos;
 
         transform.LookAt(pivot);
