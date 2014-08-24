@@ -21,9 +21,9 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         //Sets the initial points of pivot and offset positions
-        pivot = new Vector3(player.position.x, 6f, 0f);
+        pivot = new Vector3(player.position.x, 8f, 0f);
         topOffset = new Vector3(player.position.x, 30f, 0f);
-        sideOffset = new Vector3(player.position.x, 6f, -30f);
+        sideOffset = new Vector3(player.position.x, 8f, -30f);
     }
     #endregion
 
@@ -32,12 +32,12 @@ public class CameraManager : MonoBehaviour
     {
         //Sets the pivot & offset positions x to follow the player
         //(Clamps the pivot & camera x to not go beyond the level)
-        pivot.x = Mathf.Clamp(player.position.x, -13f, 19f);
+        pivot.x = Mathf.Clamp(player.position.x, -16.5f, 19f);
         topOffset.x = player.position.x;
         sideOffset.x = player.position.x;
 
         tempPos = transform.position;
-        tempPos.x = Mathf.Clamp(player.position.x, -13f, 19f); 
+        tempPos.x = Mathf.Clamp(player.position.x, -16.5f, 19f); 
         transform.position = tempPos;
 
         transform.LookAt(pivot);
@@ -71,7 +71,7 @@ public class CameraManager : MonoBehaviour
         float startTime = Time.time;
         while (Time.time < startTime + delay)
         {
-            transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, target, Time.deltaTime * 1.5f);
             yield return null;
         }
     }

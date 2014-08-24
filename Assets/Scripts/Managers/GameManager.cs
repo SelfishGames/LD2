@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //soundManager.music[0].Play();
+        soundManager.music[0].Play();
     }
 
     void Update()
@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
             cameraManager.transform.GetChild(0).gameObject.SetActive(false);
             player.gameObject.SetActive(true);
         }
+
+        if (Input.GetKey(KeyCode.Escape))
+            Application.Quit();
     }
 
     public void TriggerCollision()

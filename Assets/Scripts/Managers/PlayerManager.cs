@@ -9,7 +9,8 @@ public class PlayerManager : MonoBehaviour
 
     private Vector3 tempPos;
 
-    private bool isJumping = false;
+    private bool justJumped = false;
+    private int jumpCount = 0;
 
     #region FixedUpdate
     void FixedUpdate()
@@ -22,12 +23,25 @@ public class PlayerManager : MonoBehaviour
         {
             rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
 
-            if (Input.GetKey(KeyCode.UpArrow) && !isJumping)
+            if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 2)
             {
-                isJumping = true;
-                rigidbody.AddForce(Vector3.up * 700);
+                justJumped = true;
+                jumpCount++;
+                rigidbody.AddForce(Vector3.up * 600);
                 gameManager.soundManager.soundFX[1].Play();
             }
+        }
+
+        RaycastHit hit;
+        if (!Physics.Raycast(transform.position, Vector3.down, out hit, 1f) && justJumped)
+        {
+            justJumped = false;
+        }
+
+        if(!justJumped)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
+                jumpCount = 0;
         }
     }
     #endregion
@@ -42,9 +56,9 @@ public class PlayerManager : MonoBehaviour
     #region OnCollisionEnter
     void OnCollisionEnter(Collision col)
     {
-        //If the player has landed 
-        if (col.gameObject.name == "Floor" && isJumping)
-            isJumping = false;
+        ////If the player has landed 
+        //if (col.gameObject.tag == "Obs" && isJumping)
+        //    isJumping = false;
     }
     #endregion
 }

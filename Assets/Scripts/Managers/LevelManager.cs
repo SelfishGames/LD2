@@ -60,10 +60,10 @@ public class LevelManager : MonoBehaviour
                 {
                     //Fades the nearWall and ceiling in and out
                     nearWall.renderer.material.color = Color.Lerp(
-                        nearWall.renderer.material.color, tempWallColour, Time.deltaTime);
+                        nearWall.renderer.material.color, tempWallColour, Time.deltaTime * 1.5f);
 
                     ceiling.renderer.material.color = Color.Lerp(
-                        ceiling.renderer.material.color, Color.clear, Time.deltaTime);
+                        ceiling.renderer.material.color, Color.clear, Time.deltaTime * 1.5f);
 
                     mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.5f, Time.deltaTime);
 
@@ -74,12 +74,12 @@ public class LevelManager : MonoBehaviour
                 {
                     //Fades the nearWall and ceiling in and out
                     nearWall.renderer.material.color = Color.Lerp(
-                        nearWall.renderer.material.color, Color.clear, Time.deltaTime);
+                        nearWall.renderer.material.color, Color.clear, Time.deltaTime * 1.5f);
 
                     ceiling.renderer.material.color = Color.Lerp(
-                        ceiling.renderer.material.color, tempCeilingColour, Time.deltaTime);
+                        ceiling.renderer.material.color, tempCeilingColour, Time.deltaTime * 1.5f);
 
-                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.0f, Time.deltaTime);
+                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.2f, Time.deltaTime);
 
                     return;
                 }
