@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
             {
                 isJumping = true;
                 rigidbody.AddForce(Vector3.up * 700);
+                gameManager.soundManager.soundFX[1].Play();
             }
         }
     }
