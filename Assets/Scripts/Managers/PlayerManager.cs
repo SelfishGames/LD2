@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour 
 {
     public GameManager gameManager;
-
+    public Vector3 startPos;
     public float speed;
 
     private Vector3 tempPos;
@@ -36,14 +36,14 @@ public class PlayerManager : MonoBehaviour
     {
         gameManager.playerExplosion.SetActive(false);
         rigidbody.velocity = Vector3.zero;
-        transform.position = new Vector3(-24, 2.3f, -1);
+        transform.position = startPos;
     }
 
     #region OnCollisionEnter
     void OnCollisionEnter(Collision col)
     {
         //If the player has landed 
-        if (col.gameObject.name == "Floor" && isJumping)
+        if (col.gameObject.tag == "Obs" && isJumping)
             isJumping = false;
     }
     #endregion

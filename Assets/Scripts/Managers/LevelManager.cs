@@ -79,7 +79,7 @@ public class LevelManager : MonoBehaviour
                     ceiling.renderer.material.color = Color.Lerp(
                         ceiling.renderer.material.color, tempCeilingColour, Time.deltaTime);
 
-                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.0f, Time.deltaTime);
+                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.2f, Time.deltaTime);
 
                     return;
                 }
