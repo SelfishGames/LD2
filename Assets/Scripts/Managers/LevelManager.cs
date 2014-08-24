@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public Transform nearWall;
     public Transform ceiling;
 
+    public Light mainLight;
 
     //True is day, false is night
     [HideInInspector]
@@ -64,6 +65,8 @@ public class LevelManager : MonoBehaviour
                     ceiling.renderer.material.color = Color.Lerp(
                         ceiling.renderer.material.color, Color.clear, Time.deltaTime);
 
+                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.5f, Time.deltaTime);
+
                     return;
                 }
             //Night
@@ -75,6 +78,8 @@ public class LevelManager : MonoBehaviour
 
                     ceiling.renderer.material.color = Color.Lerp(
                         ceiling.renderer.material.color, tempCeilingColour, Time.deltaTime);
+
+                    mainLight.intensity = Mathf.Lerp(mainLight.intensity, 0.0f, Time.deltaTime);
 
                     return;
                 }
