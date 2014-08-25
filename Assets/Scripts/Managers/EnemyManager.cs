@@ -52,9 +52,9 @@ public class EnemyManager : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
         {
-
+            gameManager.TriggerCollision();
             gameManager.playerManager.gameObject.SetActive(false);
-            gameManager.TriggerCollision(0);
+            gameManager.soundManager.explosion.Play();
             StartCoroutine(ExplosionDelay());
         }
     }

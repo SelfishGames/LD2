@@ -14,7 +14,8 @@ public class EndLevel : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         gameManager.playerManager.gameObject.SetActive(false);
-        gameManager.TriggerCollision(4);
+        gameManager.TriggerCollision();
+        gameManager.soundManager.endLevel.Play();
         StartCoroutine(ExplosionDelay (col));
         gameManager.levelLoading = true;
         gameManager.currentState = 0;

@@ -33,8 +33,9 @@ public class Spike : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
         {
+            gameManager.TriggerCollision();
             gameManager.playerManager.gameObject.SetActive(false);
-            gameManager.TriggerCollision(0);
+            gameManager.soundManager.explosion.Play();
             StartCoroutine(ExplosionDelay());
         }
     }
@@ -42,8 +43,9 @@ public class Spike : MonoBehaviour
     IEnumerator ExplosionDelay()
     {
         yield return new WaitForSeconds(2f);
-
+        
         gameManager.playerManager.ResetPlayer();
+        gameManager.cameraManager.ResetPosition();
         gameManager.player.gameObject.SetActive(true);
     }
 

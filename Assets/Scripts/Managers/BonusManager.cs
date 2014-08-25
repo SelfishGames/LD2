@@ -30,7 +30,7 @@ public class BonusManager : MonoBehaviour
                 + availableColls);
             if (collected == availableColls)
             {
-                gameManager.soundManager.soundFX[3].Play();
+                gameManager.soundManager.achievement.Play();
                 myMessages[1].gameObject.SetActive(true);
                 goldCubes++;
                 StartCoroutine(RemoveText());
