@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public bool fadeBlack;
     public bool fadeClear;
 
-    private int fadeChangeCount = 0;
     public int currentState;
 
     void Start()
@@ -33,28 +32,34 @@ public class GameManager : MonoBehaviour
         currentState = -1;
         fadeBlack = false;
         fadeClear = true;
-        mainCam.SetActive(true);
-        loadCamera.SetActive(false);
+        if(Application.loadedLevelName == "Main")
+        {
+            mainCam.SetActive(true);
+            loadCamera.SetActive(false);
+        }
     }
 
     void Update()
     {
-        if (fadeClear == true)
+        if(Application.loadedLevelName == "Main")
         {
-            fade.FadeClear();
-            
-        }
-
-        if (fadeBlack == true)
-        {
-            fade.FadeToBlack();
-
-            if (fade.alphaCheck >= 0.5f)
+            if (fadeClear == true)
             {
-                fadeBlack = false;
-                Debug.Log(fadeBlack);
+                fade.FadeClear();
+
+            }
+
+            if (fadeBlack == true)
+            {
+                fade.FadeToBlack();
+
+                if (fade.alphaCheck >= 0.5f)
+                {
+                    fadeBlack = false;
+                }
             }
         }
+        
 
         switch(currentState)
         {
@@ -66,7 +71,6 @@ public class GameManager : MonoBehaviour
                     {
                         fadeBlack = false;
                         currentState = 1;
-                        Debug.Log(fadeBlack);
                     }
 
                     break;

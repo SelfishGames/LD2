@@ -6,9 +6,11 @@ public class EnemyManager : MonoBehaviour
     public Transform[] patrolPoints;
     public float speed;
     public GameManager gameManager;
+    public bool isEndEnemy;
 
     private Color tempColour;
     private int currentArea = 0;
+
 
     void Start()
     {

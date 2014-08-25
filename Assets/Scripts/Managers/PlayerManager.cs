@@ -51,8 +51,8 @@ public class PlayerManager : MonoBehaviour
                 //Player jump
                 if (Input.GetKey(KeyCode.Space) && !isJumping)
                 {
-                    //Applies the force then starts a check for if the player has landed
-                    rigidbody.velocity = new Vector3(rigidbody.velocity.x, 12, rigidbody.velocity.z);
+                    rigidbody.velocity = new Vector3(rigidbody.velocity.x, 17, rigidbody.velocity.z);
+
                     InvokeRepeating("CheckForFloor", 1f, 0.1f);
 
                     isJumping = true;
