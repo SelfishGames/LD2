@@ -46,11 +46,9 @@ public class PlayerManager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
 
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 11, rigidbody.velocity.z);
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 15, rigidbody.velocity.z);
                 InvokeRepeating("CheckForFloor", 1f, 0.1f);
 
-                rigidbody.AddForce(Vector3.up * 900);
-                InvokeRepeating("CheckForFloor", 1f, 0.05f);
 
                 isJumping = true;
                 gameManager.soundManager.PlayJumpSound();
