@@ -4,11 +4,6 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour
 {
 
-    private Vector3 input;
-    public float moveSpeed;
-    private float maxSpeed = 15f;
-
-
     #region Fields
     public GameManager gameManager;
     public Vector3 startPos;
@@ -35,27 +30,28 @@ public class PlayerManager : MonoBehaviour
     #region FixedUpdate
     void FixedUpdate()
     {
-        if (gameManager.levelManager.worldState)
+        if (gameManager.cameraManager.gameObject.activeSelf == true)
         {
-            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
-        }
-        else
-        {
-            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
-
-            if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+            if (gameManager.levelManager.worldState)
             {
+                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
+            }
 
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 15, rigidbody.velocity.z);
-                InvokeRepeating("CheckForFloor", 1f, 0.1f);
+            else
+            {
+                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y, 0);
+                //rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
 
+                if (Input.GetKey(KeyCode.Space) && !isJumping)
+                {
+                    rigidbody.velocity = new Vector3(rigidbody.velocity.x, 12, rigidbody.velocity.z);
+                    InvokeRepeating("CheckForFloor", 1f, 0.1f);
 
-                isJumping = true;
-                gameManager.soundManager.PlayJumpSound();
+                    isJumping = true;
+                    gameManager.soundManager.PlayJumpSound();
+                }
             }
         }
-      
-
     }
     #endregion
 
@@ -83,13 +79,8 @@ public class PlayerManager : MonoBehaviour
             
         rigidbody.velocity = Vector3.zero;
         transform.position = startPos;
-    }
-    #endregion
 
-    #region OnCollisionEnter
-    void OnCollisionEnter(Collision col)
-    {
-
+        gameManager.levelManager.worldState = true;
     }
     #endregion
 }

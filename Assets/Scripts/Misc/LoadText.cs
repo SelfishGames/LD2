@@ -15,7 +15,7 @@ public class LoadText : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-         loadText.text = ("Congratulations, Level: " +  gameManager.levelManager.currentLevel + " Complete" +
+         loadText.text = ("Congratulations, Level " +  gameManager.levelManager.currentLevel + " Complete." +
             "\nPress Space to continue to the next level.");
     }
 }
