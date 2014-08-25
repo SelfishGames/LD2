@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
         {
 
             gameManager.playerManager.gameObject.SetActive(false);
-            gameManager.TriggerCollision();
+            gameManager.TriggerCollision(0);
             StartCoroutine(ExplosionDelay());
         }
     }
@@ -64,6 +64,7 @@ public class EnemyManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         gameManager.playerManager.ResetPlayer();
+        gameManager.cameraManager.ResetPosition();
         gameManager.player.gameObject.SetActive(true);
     }
 
