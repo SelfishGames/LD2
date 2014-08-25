@@ -7,36 +7,40 @@ public class SoundManager : MonoBehaviour
     #region Fields
     public GameManager gameManager;
 
-    public List<AudioSource> soundFX;
-    public List<AudioSource> music;
+    public AudioSource explosion;
+    public AudioSource jump;
+    public AudioSource collection;
+    public AudioSource endLevel;
+    public AudioSource achievement;
+
+    public AudioSource gameAmbient;
+    public AudioSource demoIdea;
     #endregion
 
     #region Start
     void Start()
     {
-        music[0].Play();
-        music[1].Play();
+        gameAmbient.Play();
+        demoIdea.Play();
     }
     #endregion
 
     #region Update
     void Update()
     {
-        for (int i = 0; i < 2; i++)
-        {
-            music[i].volume = 0.1f;
-        }
+        gameAmbient.volume = 0.1f;
+        demoIdea.volume = 0.1f;
         
         //Fade songs based on the worldState 
         if (gameManager.levelManager.worldState)
         {
-            FadeIn(music[0]);
-            FadeOut(music[1]);
+            FadeIn(gameAmbient);
+            FadeOut(demoIdea);
         }
         else
         {
-            FadeIn(music[1]);
-            FadeOut(music[0]);
+            FadeIn(demoIdea);
+            FadeOut(gameAmbient);
         }
     }
     #endregion
@@ -50,20 +54,6 @@ public class SoundManager : MonoBehaviour
     void FadeOut(AudioSource sound)
     {
         sound.volume = Mathf.Lerp(sound.volume, 0f, Time.deltaTime);
-    }
-    #endregion
-
-    #region Explosion
-    public void PlayExplosionSound()
-    {
-        soundFX[0].Play();
-    }
-    #endregion
-
-    #region Jump
-    public void PlayJumpSound()
-    {
-        soundFX[1].Play();
     }
     #endregion
 }

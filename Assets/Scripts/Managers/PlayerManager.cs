@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
                     InvokeRepeating("CheckForFloor", 1f, 0.1f);
 
                     isJumping = true;
-                    gameManager.soundManager.PlayJumpSound();
+                    gameManager.soundManager.jump.Play();
                 }
             }
         }

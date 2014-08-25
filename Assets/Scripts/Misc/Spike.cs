@@ -34,7 +34,7 @@ public class Spike : MonoBehaviour
         if (col.gameObject.name == "Player")
         {
             gameManager.playerManager.gameObject.SetActive(false);
-            gameManager.TriggerCollision(0);
+            gameManager.soundManager.explosion.Play();
             StartCoroutine(ExplosionDelay());
         }
     }
