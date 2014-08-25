@@ -110,10 +110,6 @@ public class GameManager : MonoBehaviour
                     break;
                 }
         }
-           
-
-        
-        
 
         if (Input.GetKey(KeyCode.Escape))
             Application.Quit();
@@ -137,7 +133,6 @@ public class GameManager : MonoBehaviour
             particleSystems[1].SetActive(true);
         }
        
-        
         //Play death sound
         soundManager.PlayExplosionSound();
     }

@@ -13,6 +13,7 @@ public class RoomManager : MonoBehaviour
     public Color obstacleColours;
     public Color wallColour;
     public Color floorColour;
+    public Color greyColour;
 
     private Color roomsTempColour;
     private Color wallsTempColour;
@@ -23,21 +24,28 @@ public class RoomManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerTempColour = player.renderer.material.color;
+        //playerTempColour = player.renderer.material.color;
 
-        roomsTempColour = rooms[0].GetChild(0).renderer.material.color;
+        //roomsTempColour = rooms[0].GetChild(0).renderer.material.color;
 
-        wallsTempColour = walls[0].renderer.material.color;
-        
-        floorsTempColour = floors[0].renderer.material.color;
-        
+        //wallsTempColour = walls[0].renderer.material.color;
+
+        //floorsTempColour = floors[0].renderer.material.color;
+
+        playerTempColour = Color.white;
+
+        roomsTempColour = greyColour;
+
+        wallsTempColour = greyColour;
+
+        floorsTempColour = greyColour;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (!gameManager.levelManager.worldState)
+        if (gameManager.levelManager.worldState)
         {
 
             player.renderer.material.color = Color.Lerp(
@@ -77,18 +85,18 @@ public class RoomManager : MonoBehaviour
                         t.renderer.material.color = Color.Lerp(
                           t.renderer.material.color, roomsTempColour, Time.deltaTime * 5);
                 }
+            }
 
-                foreach (Transform t in walls)
-                {
-                    t.renderer.material.color = Color.Lerp(
-                          t.renderer.material.color, wallsTempColour, Time.deltaTime * 5);
-                }
+            foreach (Transform t in walls)
+            {
+                t.renderer.material.color = Color.Lerp(
+                      t.renderer.material.color, wallsTempColour, Time.deltaTime * 5);
+            }
 
-                foreach (Transform t in floors)
-                {
-                    t.renderer.material.color = Color.Lerp(
-                           t.renderer.material.color, floorsTempColour, Time.deltaTime * 5);
-                }
+            foreach (Transform t in floors)
+            {
+                t.renderer.material.color = Color.Lerp(
+                       t.renderer.material.color, floorsTempColour, Time.deltaTime * 5);
             }
         }
     }
