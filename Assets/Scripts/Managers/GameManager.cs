@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public SoundManager soundManager;
     public ButtonManager buttonManager;
     public BonusManager bonusManager;
+    public TipScript tipScript;
 
     public Fade fade;
 
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
                             levelLoading = false;
                             endplayer.jumping = false;
                             currentState = 2;
+                            tipScript.tipActive = false;
                         }
                     }
 
