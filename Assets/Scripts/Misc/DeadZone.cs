@@ -21,7 +21,6 @@ public class DeadZone : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
         {
-
             gameManager.playerManager.gameObject.SetActive(false);
             gameManager.TriggerCollision();
             StartCoroutine(ExplosionDelay());
@@ -33,6 +32,7 @@ public class DeadZone : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         gameManager.playerManager.ResetPlayer();
+        gameManager.cameraManager.ResetPosition();
         gameManager.player.gameObject.SetActive(true);
     }
 }
