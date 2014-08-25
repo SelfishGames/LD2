@@ -38,7 +38,6 @@ public class LevelManager : MonoBehaviour
     #region Update
     void Update()
     {
-
         if(gameManager.cameraManager.gameObject.activeSelf == true)
         {
             //Changes worldStates 

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     // Scripts
     public CameraManager cameraManager;
     public LevelManager levelManager;
+    public RoomManager roomManager;
     public PlayerManager playerManager;
     public SoundManager soundManager;
     public ButtonManager buttonManager;
