@@ -55,9 +55,7 @@ public class LevelManager : MonoBehaviour
                     worldState = true;
                 }
             }
-
         }
-
 
         switch (worldState)
         {

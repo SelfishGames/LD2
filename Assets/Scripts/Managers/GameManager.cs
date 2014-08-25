@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
                 }
             case 1:
                 {
+                    cameraManager.ResetPosition();
                     mainCam.SetActive(false);
                     loadCamera.SetActive(true);
 
@@ -91,7 +92,6 @@ public class GameManager : MonoBehaviour
                 }
             case 2:
                 {
-                    
                     fadeBlack = true;
 
                     if (fade.alphaCheck >= 0.5f)
