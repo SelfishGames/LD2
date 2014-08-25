@@ -18,6 +18,7 @@ public class EndLevel : MonoBehaviour
         StartCoroutine(ExplosionDelay (col));
         gameManager.levelLoading = true;
         gameManager.currentState = 0;
+        gameManager.levelManager.currentLevel++;
     }
 
     IEnumerator ExplosionDelay(Collider col)
@@ -26,7 +27,7 @@ public class EndLevel : MonoBehaviour
         //gameManager.cameraManager.transform.GetChild(0).gameObject.SetActive(true);
         
         gameManager.playerManager.ResetPlayer();
-        gameManager.levelManager.currentLevel++;
+        
         gameManager.levelManager.ArrangeObstacles();
     }
 }

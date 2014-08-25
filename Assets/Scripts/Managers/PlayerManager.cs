@@ -3,6 +3,12 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
+
+    private Vector3 input;
+    public float moveSpeed;
+    private float maxSpeed = 15f;
+
+
     #region Fields
     public GameManager gameManager;
     public Vector3 startPos;
@@ -39,12 +45,14 @@ public class PlayerManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
             {
-                rigidbody.AddForce(Vector3.up * 700);
+                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 11, rigidbody.velocity.z);
                 InvokeRepeating("CheckForFloor", 1f, 0.1f);
                 isJumping = true;
                 gameManager.soundManager.PlayJumpSound();
             }
         }
+      
+
     }
     #endregion
 

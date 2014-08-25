@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        if (!gameManager.levelManager.worldState)
+        if (gameManager.levelManager.worldState)
         {
             StartCoroutine(RemoveCollider(true));
             transform.renderer.material.color = Color.Lerp(
