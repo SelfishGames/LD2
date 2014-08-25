@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
         {
 
             gameManager.playerManager.gameObject.SetActive(false);
-            gameManager.TriggerCollision();
+            gameManager.TriggerCollision(0);
             StartCoroutine(ExplosionDelay());
         }
     }

@@ -27,6 +27,7 @@ public class Collectable : MonoBehaviour
     {
         gameManager.bonusManager.tempCollected += 1;
         gameManager.bonusManager.collected += 1;
+        gameManager.soundManager.soundFX[2].Play();
         gameObject.SetActive(false);
     }
 }

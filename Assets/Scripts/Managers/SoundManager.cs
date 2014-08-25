@@ -22,6 +22,11 @@ public class SoundManager : MonoBehaviour
     #region Update
     void Update()
     {
+        for (int i = 0; i < 2; i++)
+        {
+            music[i].volume = 0.1f;
+        }
+        
         //Fade songs based on the worldState 
         if (gameManager.levelManager.worldState)
         {

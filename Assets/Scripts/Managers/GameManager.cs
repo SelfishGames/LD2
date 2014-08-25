@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
             Application.Quit();
     }
 
-    public void TriggerCollision()
+    public void TriggerCollision(int sound)
     {
         if(!levelManager.worldState)
         {
@@ -142,6 +142,6 @@ public class GameManager : MonoBehaviour
         }
        
         //Play death sound
-        soundManager.PlayExplosionSound();
+        soundManager.soundFX[sound].Play();
     }
 }

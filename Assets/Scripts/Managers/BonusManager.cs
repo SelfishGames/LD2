@@ -7,10 +7,8 @@ public class BonusManager : MonoBehaviour
     public GameManager gameManager;
     public List<Transform> collectables = new List<Transform>();
     public GUIText[] myMessages;
-    [HideInInspector]
     public int collected;
     public TextMesh goldCubeText;
-    [HideInInspector]
     public int tempCollected;
     private int availableColls;
     private int goldCubes;
@@ -32,6 +30,7 @@ public class BonusManager : MonoBehaviour
                 + availableColls);
             if (collected == availableColls)
             {
+                gameManager.soundManager.soundFX[3].Play();
                 myMessages[1].gameObject.SetActive(true);
                 goldCubes++;
                 StartCoroutine(RemoveText());
