@@ -33,21 +33,25 @@ public class PlayerManager : MonoBehaviour
     #region FixedUpdate
     void FixedUpdate()
     {
-        if (gameManager.levelManager.worldState)
+        if (gameManager.cameraManager.gameObject.activeSelf == true)
         {
-            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
-        }
-        else
-        {
-            rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
-
-            if (Input.GetKey(KeyCode.Space) && !isJumping)
+            if (gameManager.levelManager.worldState)
             {
-                rigidbody.velocity = new Vector3(rigidbody.velocity.x, 15, rigidbody.velocity.z);
-                InvokeRepeating("CheckForFloor", 1f, 0.1f);
+                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
+            }
+            else
+            {
+                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y, 0);
+                //rigidbody.AddForce(Input.GetAxis("Horizontal") * speed, 0, 0);
 
-                isJumping = true;
-                gameManager.soundManager.PlayJumpSound();
+                if (Input.GetKey(KeyCode.Space) && !isJumping)
+                {
+                    rigidbody.velocity = new Vector3(rigidbody.velocity.x, 12, rigidbody.velocity.z);
+                    InvokeRepeating("CheckForFloor", 1f, 0.1f);
+
+                    isJumping = true;
+                    gameManager.soundManager.PlayJumpSound();
+                }
             }
         }
     }
@@ -77,13 +81,8 @@ public class PlayerManager : MonoBehaviour
             
         rigidbody.velocity = Vector3.zero;
         transform.position = startPos;
-    }
-    #endregion
 
-    #region OnCollisionEnter
-    void OnCollisionEnter(Collision col)
-    {
-
+        gameManager.levelManager.worldState = true;
     }
     #endregion
 }

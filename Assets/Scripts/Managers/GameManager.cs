@@ -120,17 +120,17 @@ public class GameManager : MonoBehaviour
         if(!levelManager.worldState)
         {
             // Set the location of the explosion.
-            particleSystems[0].transform.localPosition = player.transform.localPosition;
+            particleSystems[1].transform.localPosition = player.transform.localPosition;
             // Play the explosion.
-            particleSystems[0].SetActive(true);
+            particleSystems[1].SetActive(true);
         }
 
         if (levelManager.worldState)
         {
             // Set the location of the explosion.
-            particleSystems[1].transform.localPosition = player.transform.localPosition;
+            particleSystems[0].transform.localPosition = player.transform.localPosition;
             // Play the explosion.
-            particleSystems[1].SetActive(true);
+            particleSystems[0].SetActive(true);
         }
        
         //Play death sound

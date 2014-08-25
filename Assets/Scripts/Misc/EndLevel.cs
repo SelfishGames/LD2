@@ -23,8 +23,7 @@ public class EndLevel : MonoBehaviour
 
     IEnumerator ExplosionDelay(Collider col)
     {
-        yield return new WaitForSeconds(2f);
-        //gameManager.cameraManager.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
         
         gameManager.playerManager.ResetPlayer();
         

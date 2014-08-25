@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         if(gameManager.cameraManager.gameObject.activeSelf == true)
         {
             //Changes worldStates 
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKeyDown(KeyCode.LeftControl))
             {
                 if (worldState)
                 {
