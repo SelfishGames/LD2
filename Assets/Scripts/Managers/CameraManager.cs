@@ -13,7 +13,9 @@ public class CameraManager : MonoBehaviour
         pivot,
         target;
 
-    private float delay = 5;
+    private bool isLerping = false;
+
+    private float delay = 2;
 
     private Quaternion tempEuler;
     #endregion 
@@ -31,20 +33,30 @@ public class CameraManager : MonoBehaviour
     #region Update
     void Update()
     {
-       
-        //Sets the pivot & offset positions x to follow the player
-        //(Clamps the pivot & camera x to not go beyond the level)
-        //pivot.x = Mathf.Clamp(player.position.x, -16.5f, 19f);
-        pivot.x = player.position.x;
-        topOffset.x = player.position.x;
-        sideOffset.x = player.position.x;
-
         tempPos = transform.position;
-        //tempPos.x = Mathf.Clamp(player.position.x, -16.5f, 19f); 
-        tempPos.x = player.position.x;
+        tempPos.x = Mathf.Lerp(tempPos.x, player.position.x, Time.deltaTime * 2);
+        Debug.Log(tempPos.x);
+
+        pivot.x = tempPos.x;
+        topOffset.x = tempPos.x;
+        sideOffset.x = tempPos.x;
+        target.x = tempPos.x;
+
         transform.position = tempPos;
 
         transform.LookAt(pivot);
+    }
+    #endregion
+
+    #region ResetPosition
+    public void ResetPosition()
+    {
+        //Sets the x position of the top offset back to the player after reactivating
+        //then sets the cameras position to that vector
+        tempPos.x = player.position.x;
+        topOffset.x = tempPos.x;
+        transform.position = topOffset;
+        gameManager.levelManager.worldState = true;
     }
     #endregion
 

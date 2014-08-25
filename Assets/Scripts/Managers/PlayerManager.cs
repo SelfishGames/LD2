@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour
 {
-
     #region Fields
     public GameManager gameManager;
     public Vector3 startPos;
@@ -13,17 +12,21 @@ public class PlayerManager : MonoBehaviour
     private Vector3 tempPos;
 
     private bool isJumping = false;
+
+    private Vector3 rightRay,
+        leftRay;
     #endregion
 
     void Start()
     {
-
+        rightRay = (Vector3.down + new Vector3(0.5f, 0, 0));
+        leftRay = (Vector3.down + new Vector3(-0.5f, 0, 0));
     }
 
     #region Update
     void Update()
     {
-        
+        Debug.DrawRay(transform.position, rightRay, Color.red);
     }
     #endregion
 
@@ -36,7 +39,6 @@ public class PlayerManager : MonoBehaviour
             {
                 rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
             }
-
             else
             {
                 rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y, 0);
@@ -60,8 +62,8 @@ public class PlayerManager : MonoBehaviour
         if (isJumping)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, (Vector3.down + Vector3.right).normalized, out hit, 1.5f) ||
-                (Physics.Raycast(transform.position, (Vector3.down + Vector3.left).normalized, out hit, 1.5f)))
+            if (Physics.Raycast(transform.position, rightRay, out hit, 1.7f) ||
+                (Physics.Raycast(transform.position, leftRay, out hit, 1.7f)))
             {
                 isJumping = false;
                 CancelInvoke();
