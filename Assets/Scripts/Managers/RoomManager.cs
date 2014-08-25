@@ -55,8 +55,11 @@ public class RoomManager : MonoBehaviour
 
             foreach (Transform t in walls)
             {
-                t.renderer.material.color = Color.Lerp(
-                       t.renderer.material.color, wallColour, Time.deltaTime);
+                if (t.gameObject.activeSelf == true)
+                {
+                    t.renderer.material.color = Color.Lerp(
+                           t.renderer.material.color, wallColour, Time.deltaTime);
+                }
             }
 
             foreach (Transform t in floors)

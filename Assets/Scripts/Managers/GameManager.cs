@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //[HideInInspector]
     public bool levelLoading = false;
     public bool unfade = false;
+    public EndPlayer endplayer;
 
     public GameObject mainCam;
     public GameObject loadCamera;
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public PlayerManager playerManager;
     public SoundManager soundManager;
     public ButtonManager buttonManager;
+    public BonusManager bonusManager;
+
     public Fade fade;
 
     public bool fadeBlack;
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
                             //cameraManager.transform.GetChild(0).gameObject.SetActive(false);
                             player.gameObject.SetActive(true);
                             levelLoading = false;
-
+                            endplayer.jumping = false;
                             currentState = 2;
                         }
                     }
@@ -102,7 +105,7 @@ public class GameManager : MonoBehaviour
                     {
                         fadeBlack = false;
                         currentState = -1;
-                        Debug.Log(fadeBlack);
+
                         mainCam.SetActive(true);
                         loadCamera.SetActive(false);
                     }

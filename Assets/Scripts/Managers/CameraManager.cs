@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour
         pivot,
         target;
 
-    private bool isLerping = false;
+
 
     private float delay = 2;
 
@@ -35,7 +35,7 @@ public class CameraManager : MonoBehaviour
     {
         tempPos = transform.position;
         tempPos.x = Mathf.Lerp(tempPos.x, player.position.x, Time.deltaTime * 2);
-        Debug.Log(tempPos.x);
+
 
         pivot.x = tempPos.x;
         topOffset.x = tempPos.x;

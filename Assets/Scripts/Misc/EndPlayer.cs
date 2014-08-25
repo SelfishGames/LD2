@@ -5,21 +5,21 @@ public class EndPlayer : MonoBehaviour
 {
     public GameManager gameManager;
     public float force;
-    private bool jumping = false;
-
+    public bool jumping = false;
+    private float grav;
     void start()
     {
-       
-
+        
+        
     }
 
     // Update is called once per frame
     void Update ()
     {
-
-        Physics.gravity = new Vector3(0, -50, 0);
+       
         if(gameManager.levelLoading)
         {
+            Physics.gravity = new Vector3(0, -50, 0);
             transform.Rotate(Vector3.up, Time.deltaTime * 150);
             if(!jumping)
             {
@@ -37,6 +37,10 @@ public class EndPlayer : MonoBehaviour
             {
                 jumping = false;
             }
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0, -20, 0);
         }
     }
 }

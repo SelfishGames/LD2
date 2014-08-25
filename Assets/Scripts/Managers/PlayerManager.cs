@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
         {
             if (gameManager.levelManager.worldState)
             {
-                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, 0, Input.GetAxis("Vertical") * speed);
+                rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * speed, rigidbody.velocity.y, Input.GetAxis("Vertical") * speed);
             }
             else
             {

@@ -28,5 +28,6 @@ public class EndLevel : MonoBehaviour
         gameManager.playerManager.ResetPlayer();
         
         gameManager.levelManager.ArrangeObstacles();
+        gameManager.bonusManager.tempCollected = 0;
     }
 }
