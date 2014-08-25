@@ -4,6 +4,7 @@ using System.Collections;
 public class EndLevel : MonoBehaviour
 {    
     public GameManager gameManager;
+
     // Update is called once per frame
     void Update ()
     {
@@ -14,14 +15,16 @@ public class EndLevel : MonoBehaviour
     {
         gameManager.playerManager.gameObject.SetActive(false);
         gameManager.TriggerCollision();
-        StartCoroutine(ExplosionDelay (col));	
+        StartCoroutine(ExplosionDelay (col));
+        gameManager.levelLoading = true;
+        gameManager.currentState = 0;
     }
 
     IEnumerator ExplosionDelay(Collider col)
     {
         yield return new WaitForSeconds(2f);
-        gameManager.cameraManager.transform.GetChild(0).gameObject.SetActive(true);
-
+        //gameManager.cameraManager.transform.GetChild(0).gameObject.SetActive(true);
+        
         gameManager.playerManager.ResetPlayer();
         gameManager.levelManager.currentLevel++;
         gameManager.levelManager.ArrangeObstacles();

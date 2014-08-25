@@ -38,20 +38,26 @@ public class LevelManager : MonoBehaviour
     #region Update
     void Update()
     {
-        //Changes worldStates 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+
+        if(gameManager.cameraManager.gameObject.activeSelf == true)
         {
-            if (worldState)
+            //Changes worldStates 
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                gameManager.cameraManager.StartLerp(1);
-                worldState = false;
+                if (worldState)
+                {
+                    gameManager.cameraManager.StartLerp(1);
+                    worldState = false;
+                }
+                else
+                {
+                    gameManager.cameraManager.StartLerp(2);
+                    worldState = true;
+                }
             }
-            else
-            {
-                gameManager.cameraManager.StartLerp(2);
-                worldState = true;
-            }
+
         }
+        
 
         switch (worldState)
         {

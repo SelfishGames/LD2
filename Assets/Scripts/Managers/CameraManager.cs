@@ -5,6 +5,7 @@ public class CameraManager : MonoBehaviour
 {
     #region Fields
     public Transform player;
+    public GameManager gameManager;
 
     private Vector3 tempPos,
         sideOffset,
@@ -30,6 +31,7 @@ public class CameraManager : MonoBehaviour
     #region Update
     void Update()
     {
+
         //Sets the pivot & offset positions x to follow the player
         //(Clamps the pivot & camera x to not go beyond the level)
         //pivot.x = Mathf.Clamp(player.position.x, -16.5f, 19f);
